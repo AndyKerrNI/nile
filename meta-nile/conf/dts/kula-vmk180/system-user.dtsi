@@ -18,7 +18,11 @@
 
 		pcie_enet_mem: buffer@70000000 {
 			no-map;
-			reg = <0x00 0x70000000 0x00 0x800000>;
+			reg = <0x00 0x70000000 0x00 0x100000>;
+		};
+		pcie_dma_mem: buffer@70100000 {
+			no-map;
+			reg = <0x00 0x70100000 0x00 0x100000>;
 		};
 	};
 
@@ -32,4 +36,17 @@
 
 		status = "okay";
 	};
+
+	hostarmdma0: dmademo {
+		compatible = "ni,host-arm-dma";
+		reg = <0x00 0x70100000 0x00 0x100000>;
+		ni,axi-gpio-0 = <&axi_gpio_0>;
+		ni,axi-gpio-1 = <&axi_gpio_1>;
+
+		interrupt-parent = <&gic>;
+		interrupts = <0x0 0x5d 0x4>;
+
+		status = "okay";
+	};
+
 };
